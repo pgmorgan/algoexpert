@@ -4,7 +4,7 @@
 
 	current := tree
 	for true {
-		if current.value < value {
+		if value < current.value {
 			if current.left == nil {
 				current.left = &BST{value: value}
 				break
@@ -26,10 +26,10 @@
 func (tree *BST) Contains(value int) bool {
 	current := tree
 	for current != nil {
-		if current.value < value {
-			current = current.right
-		} else if current.value > value {
+		if value < current.value{
 			current = current.left
+		} else if value > current.value {
+			current = current.right
 		} else if current.value == value {
 			return true
 		}
