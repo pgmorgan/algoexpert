@@ -69,7 +69,27 @@ func (tree *BST) findTargetAndParent(value int) (cur *BST, pLeft **BST, pRight *
 }
 
 func (tree *BST) Remove(value int) *BST {
-	cur, parentWB, parentEB := tree.findTargetAndParent(value)
+	cur := tree
+	if cur == nil {
+		return nil
+	}
+	parentWB, parentEB := &tree, &tree
+
+	if cur.value != value {
+		for cur.value != value {
+			if value < cur.value {
+				parentWB = &cur
+				parentEB = nil
+				cur = cur.left
+			} else if value > cur.value {
+				parentWB = nil
+				parentEB = &cur
+				cur = cur.right
+			}
+		}	
+		cur.Remove(value)
+	}
+
 	if cur.left == nil && cur.right == nil {
 	// Target has no children
 		fmt.Println(cur.value, value)
