@@ -63,10 +63,10 @@ func (tree *BST) remove(value int, parent *BST, ad_tree **BST) {
 			if current.left != nil && current.right != nil {
 				current.value = current.right.getMinValue()
 				current.right.remove(current.value, current, &(current.right))
-			// 	CASE 1 - TARGET HAS TWO CHILDREN
+				// 	CASE 1 - TARGET HAS TWO CHILDREN
 			} else if parent == nil {
-			/*	CASE 2 - TARGET HAS ONE OR ZERO CHILDREN
-						 AND TARGET IS THE ROOT NODE */
+				/*	CASE 2 - TARGET HAS ONE OR ZERO CHILDREN
+					AND TARGET IS THE ROOT NODE */
 				if current.left != nil {
 					*ad_tree = current.left
 				} else if current.right != nil {
@@ -75,9 +75,9 @@ func (tree *BST) remove(value int, parent *BST, ad_tree **BST) {
 					current.value = 0
 				}
 			} else if parent.left == current {
-			/*	CASE 3 - TARGET HAS ONE OR ZERO CHILDREN AND
-						 TARGET IS NOT THE ROOT NODE AND
-						 TARGET IS A LEFT CHILD */
+				/*	CASE 3 - TARGET HAS ONE OR ZERO CHILDREN AND
+					TARGET IS NOT THE ROOT NODE AND
+					TARGET IS A LEFT CHILD */
 				if current.left != nil {
 					parent.left = current.left
 				} else {

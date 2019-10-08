@@ -1,4 +1,13 @@
-(tree *BST) Insert(value int) *BST {
+package program
+
+type BST struct {
+	value int
+
+	left  *BST
+	right *BST
+}
+
+func (tree *BST) Insert(value int) *BST {
 	// Write your code here.
 	// Do not edit the return statement of this method.
 
@@ -26,7 +35,7 @@
 func (tree *BST) Contains(value int) bool {
 	current := tree
 	for current != nil {
-		if value < current.value{
+		if value < current.value {
 			current = current.left
 		} else if value > current.value {
 			current = current.right
@@ -56,7 +65,7 @@ func findTargetAndParent(tree *BST, value int) (node *BST, parent *BST, right bo
 		}
 	}
 	return nil, nil, false
-}	
+}
 
 func findSmallestAndParent(toBeDel *BST) (node *BST, parent *BST) {
 	parent = toBeDel

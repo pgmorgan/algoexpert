@@ -1,8 +1,6 @@
 package program
 
 import (
-	"reflect"
-	"testing"
 	"fmt"
 )
 
@@ -86,24 +84,24 @@ func (tree *BST) Remove(value int) *BST {
 				parentEB = &cur
 				cur = cur.right
 			}
-		}	
+		}
 		cur.Remove(value)
 	}
 
 	if cur.left == nil && cur.right == nil {
-	// Target has no children
+		// Target has no children
 		fmt.Println(cur.value, value)
 		tree = nil
 	} else if cur.left != nil && cur.right == nil {
-	// Target has one left child
+		// Target has one left child
 		if parentWB == parentEB {
-		// And Target is Root
+			// And Target is Root
 			tree = cur.left
 		} else if parentWB != nil && parentEB == nil {
-		// And target has one parent to its right (WB)
+			// And target has one parent to its right (WB)
 			(*parentWB).left = cur.left
 		} else if parentWB == nil && parentEB != nil {
-		// And target has one parent to its left (EB)
+			// And target has one parent to its left (EB)
 			(*parentEB).right = cur.left
 		}
 	} else if cur.left == nil && cur.right != nil {
@@ -128,39 +126,4 @@ func (tree *BST) getMinValue() int {
 		cur = cur.left
 	}
 	return cur.value
-}
-
-var test2 = NewBST(10, 15, 11, 22).Remove(15)
-//var test2 = NewBST(10, 15, 11, 22)
-
-func NewBST(root int, values ...int) *BST {
-	tree := &BST{value: root}
-	for _, value := range values {
-		tree.Insert(value)
-	}
-	return tree
-}
-
-func (tree *BST) InOrderTraverse(array []int) []int {
-	if tree == nil {
-		return array
-	}
-	if tree.left != nil {
-		array = tree.left.InOrderTraverse(array)
-	}
-	array = append(array, tree.value)
-	if tree.right != nil {
-		array = tree.right.InOrderTraverse(array)
-	}
-	return array
-}
-
-func TestCase14(t *testing.T) {
-	output := test2.InOrderTraverse([]int{})
-	expected := []int{10, 11, 22}
-	fmt.Println(output)
-	fmt.Println(expected)
-	if !reflect.DeepEqual(output, expected) {
-		t.Fail()
-	}
 }
